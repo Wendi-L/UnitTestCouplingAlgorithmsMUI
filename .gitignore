@@ -1,0 +1,11 @@
+.cproject
+.project
+.settings
+.pydevproject
+Debug
+Release
+build
+*.x
+*results_*
+*heat-left
+*heat-right
