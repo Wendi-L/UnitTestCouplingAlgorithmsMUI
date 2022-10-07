@@ -5,7 +5,7 @@ CFLAGS	= -Wall -Wextra
 
 HEADER_PATH_MUI	= -I../../MUI-CA_design
 
-LDFLAGS = -lstdc++
+LDFLAGS = -lstdc++ -fpermissive
 
 SCR = $(wildcard *.cpp)
 EXE = $(SCR:.cpp=)
