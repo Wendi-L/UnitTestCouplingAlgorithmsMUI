@@ -86,7 +86,7 @@ int main( int argc, char ** argv ) {
     // fetch data from the other solver
     sampler_pseudo_nearest_neighbor1d<double> s1(0.1);
     chrono_sampler_exact1d  s2;
-	algo_aitken1d aitken(0.01,1.0,ptsVluInit);
+	algo_aitken1d aitken(0.01,1.0);
 
      // Print off a hello world message
     printf("Hello world from Left rank %d out of %d MUI processors\n",
@@ -113,6 +113,8 @@ int main( int argc, char ** argv ) {
 
             u[6] = interface.fetch( "u0", 6 * H, t, s1, s2, aitken );
 
+            printf( "Left under relaxation factor at t= %d is %f\n", t, aitken.get_under_relaxation_factor(t));
+            printf( "Left residual L2 Norm at t= %d is %f\n", t, aitken.get_residual_L2_Norm(t));
 
             // calculate 'interior' points
             for ( int i = 1; i <  6; i++ ) v[i] = u[i] + k / ( H * H ) * ( u[i - 1] + u[i + 1] - 2 * u[i] );
