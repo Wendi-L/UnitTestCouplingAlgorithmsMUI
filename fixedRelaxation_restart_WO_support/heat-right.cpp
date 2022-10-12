@@ -30,35 +30,35 @@ int main( int argc, char ** argv ) {
 
     /// Initialise values from file
     std::string inoutFilenameL = "right_FR.csv";
-	std::fstream inFile;
-	std::vector<std::vector<std::string>> content;
-	std::vector<std::string> row;
+    std::fstream inFile;
+    std::vector<std::vector<std::string>> content;
+    std::vector<std::string> row;
     std::string line, word;
     inFile.open(inoutFilenameL, std::ios::in);
     if(inFile.is_open())
     {
-		while(getline(inFile, line)) {
-			row.clear();
-			std::stringstream str(line);
-			while (std::getline(str, word, ',')) {
-				row.push_back(word);
-		   }
-		   content.push_back(row);
-		}
+        while(getline(inFile, line)) {
+            row.clear();
+            std::stringstream str(line);
+            while (std::getline(str, word, ',')) {
+                row.push_back(word);
+           }
+           content.push_back(row);
+        }
 
-		for ( int i = 4; i <  11; i++ ) u1[i] = stod(content[i-3][1]);
+        for ( int i = 4; i <  11; i++ ) u1[i] = stod(content[i-3][1]);
 
-	} else {
-		std::cerr<<"right_FR.csv missing" << std::endl;
-		for ( int i = 4; i <  11; i++ ) u1[i] = 0.0;
-	}
+    } else {
+        std::cerr<<"right_FR.csv missing" << std::endl;
+        for ( int i = 4; i <  11; i++ ) u1[i] = 0.0;
+    }
 
     inFile.close();
 
     uniface1d interface( "mpi://right/ifs" );
 
-	MPI_Comm  world = mui::mpi_split_by_app();
-	MPI_Comm*  Cppworld = &world;    
+    MPI_Comm  world = mui::mpi_split_by_app();
+    MPI_Comm*  Cppworld = &world;
     int rankLocal = MPI::COMM_WORLD.Get_rank();
     int sizeLocal = MPI::COMM_WORLD.Get_size();
     
@@ -77,15 +77,15 @@ int main( int argc, char ** argv ) {
     std::vector<std::pair<mui::point1d, double>> ptsVluInit;
 
     for ( int i = 4; i <  11; i++ ) {
-		mui::point1d pt(i);
-		ptsVluInit.push_back(std::make_pair(pt,u1[i]));
-	}
+        mui::point1d pt(i);
+        ptsVluInit.push_back(std::make_pair(pt,u1[i]));
+    }
 
     // fetch data from the other solver
     sampler_pseudo_nearest_neighbor1d<double> s1(0.1);
     chrono_sampler_exact1d  s2;
-	//algo_fixedRelaxation1d fr(0.01,ptsVluInit);
-	algo_fixedRelaxation1d fr(0.01);
+    //algo_fixedRelaxation1d fr(0.01,ptsVluInit);
+    algo_fixedRelaxation1d fr(0.01);
 
      // Print off a hello world message
     printf("Hello world from Right rank %d out of %d MUI processors\n",

@@ -32,8 +32,8 @@ int main( int argc, char ** argv ) {
 
     uniface1d interface( "mpi://right/ifs" );
 
-	MPI_Comm  world = mui::mpi_split_by_app();
-	MPI_Comm*  Cppworld = &world;    
+    MPI_Comm  world = mui::mpi_split_by_app();
+    MPI_Comm*  Cppworld = &world;
     int rankLocal = MPI::COMM_WORLD.Get_rank();
     int sizeLocal = MPI::COMM_WORLD.Get_size();
     
