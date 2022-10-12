@@ -85,7 +85,7 @@ int main( int argc, char ** argv ) {
     sampler_pseudo_nearest_neighbor1d<double> s1(0.1);
     chrono_sampler_exact1d  s2;
 	algo_aitken1d aitken(0.01,1.0);
-	//algo_aitken1d aitken(0.514535,1.0,ptsVluInit);
+	//algo_aitken1d aitken(0.514535,1.0,world,ptsVluInit);
 
      // Print off a hello world message
     printf("Hello world from Right rank %d out of %d MUI processors\n",

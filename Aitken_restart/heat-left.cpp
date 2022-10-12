@@ -86,7 +86,7 @@ int main( int argc, char ** argv ) {
     // fetch data from the other solver
     sampler_pseudo_nearest_neighbor1d<double> s1(0.1);
     chrono_sampler_exact1d  s2;
-	algo_aitken1d aitken(0.01,1.0,ptsVluInit,0.023969);
+	algo_aitken1d aitken(0.01,1.0,world,ptsVluInit,0.023969);
 
      // Print off a hello world message
     printf("Hello world from Left rank %d out of %d MUI processors\n",
